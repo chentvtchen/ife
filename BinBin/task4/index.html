@@ -21,7 +21,13 @@
 		</div>
 		<script>
 			var list = document.getElementById('list');
+			var listItem = list.getElementsByTagName('li');
 			var reg=/^\d+$/;
+			for(var i=0,len=listItem.length;i<len;i++ ){
+				listItem[i].onclick = function(){
+					this.parentNode.removeChild(this);
+				}
+			}
 			//左侧出
 			function leftOut(){
 				list.getElementsByTagName('li')[0].remove();
@@ -37,6 +43,9 @@
 				var li = document.createElement('li');
 				if(reg.test(numValue)){
 					li.innerHTML = numValue;
+					li.onclick = function(){
+					this.parentNode.removeChild(this);
+				}
 					var item = list.getElementsByTagName('li')[0]
 					list.insertBefore(li,item);					
 				}else{
@@ -49,11 +58,15 @@
 				var li = document.createElement('li');
 				if(reg.test(numValue)){
 					li.innerHTML = numValue;
+					li.onclick = function(){
+					this.parentNode.removeChild(this);
+				}					
 					list.appendChild(li);
 				}else{
 					alert('请输入数字');
 				}					
 			}
+
 		</script>
 	</body>
 </html>
