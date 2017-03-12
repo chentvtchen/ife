@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<div class="main">
-			<input type="text" id="num"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+			<input type="number" id="num"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
 			<!--input无法输入英文    type number为html-->
 			<button id="left-out" onclick="leftOut()">左侧入</button>
 			<button id="right-out" onclick="rightOut()">右侧出</button>
@@ -22,7 +22,9 @@
 		<script>
 			var list = document.getElementById('list');
 			var listItem = list.getElementsByTagName('li');
+			//正则匹配数字
 			var reg=/^\d+$/;
+			//点击移除这个元素
 			for(var i=0,len=listItem.length;i<len;i++ ){
 				listItem[i].onclick = function(){
 					this.parentNode.removeChild(this);
