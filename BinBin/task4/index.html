@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>数值的插入</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div class="main">
+			<input type="text" id="num"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+			<!--input无法输入英文    type number为html-->
+			<button id="left-out" onclick="leftOut()">左侧入</button>
+			<button id="right-out" onclick="rightOut()">右侧出</button>
+			<button id="left-in" onclick="leftIn()">左插入</button>
+			<button id="right-in" onclick="rightIn()">右插入</button>
+			<ul id="list" class="list">
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+			</ul>			
+		</div>
+		<script>
+			var list = document.getElementById('list');
+			var reg=/^\d+$/;
+			//左侧出
+			function leftOut(){
+				list.getElementsByTagName('li')[0].remove();
+			}
+			//右侧出
+			function rightOut(){
+				var len = list.getElementsByTagName('li').length;
+				list.getElementsByTagName('li')[len-1].remove();
+			}
+			//左侧入
+			function leftIn(){
+				var numValue = document.getElementById('num').value;
+				var li = document.createElement('li');
+				if(reg.test(numValue)){
+					li.innerHTML = numValue;
+					var item = list.getElementsByTagName('li')[0]
+					list.insertBefore(li,item);					
+				}else{
+					alert('请输入数字');
+				}
+			}
+			//右侧入
+			function rightIn(){
+				var numValue = document.getElementById('num').value;
+				var li = document.createElement('li');
+				if(reg.test(numValue)){
+					li.innerHTML = numValue;
+					list.appendChild(li);
+				}else{
+					alert('请输入数字');
+				}					
+			}
+		</script>
+	</body>
+</html>

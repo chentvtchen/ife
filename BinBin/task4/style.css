@@ -1,0 +1,12 @@
+.main{
+	padding: 50px;
+}
+.list li{
+	padding: 20px;
+	background-color: red;
+	color: white;
+	float: left;
+	margin-left: 0px;
+	list-style: none;
+	margin-left: 10px;
+}
