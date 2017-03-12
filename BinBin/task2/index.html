@@ -25,9 +25,9 @@ var aqiData = [
 ];
 var numberList = ["一","二","三","四","五" ,"六"];
 function swap(array, i, j) {
-  var temp = array[i][1];
-  array[i][1] = array[j][1];
-  array[j][1] = temp;
+  var temp = array[i];
+  array[i] = array[j];
+  array[j] = temp;
 }
 //冒泡排序算法
 function bubbleSortBasic(array) {
