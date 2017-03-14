@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>数值的插入</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div class="main">
+			<input type="number" id="num"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+			<!--input无法输入英文    type number为html-->
+			<button id="left-out" onclick="leftOut()">左侧入</button>
+			<button id="right-out" onclick="rightOut()">右侧出</button>
+			<button id="left-in" onclick="leftIn()">左插入</button>
+			<button id="right-in" onclick="rightIn()">右插入</button>
+			<ul id="list" class="list">
+			</ul>	
+			<button class="sort" id="sort" onclick="sort()">排序</button>
+			<ul id="sort-list" class="list"></ul>
+		</div>
+		<script>
+			var list = document.getElementById('list');
+			var listItem = list.getElementsByTagName('li');
+			var sortList = document.getElementById('sort-list');
+			//正则匹配数字
+			var reg=/^\d+$/;
+			//点击移除这个元素
+			for(var i=0,len=listItem.length;i<len;i++ ){
+				listItem[i].onclick = function(){
+					this.parentNode.removeChild(this);
+				}
+			}
+			//左侧出
+			function leftOut(){
+				list.getElementsByTagName('li')[0].remove();
+			}
+			//右侧出
+			function rightOut(){
+				var len = list.getElementsByTagName('li').length;
+				list.getElementsByTagName('li')[len-1].remove();
+			}
+			//左插入
+			function leftIn(){
+				//如果队列数不超过60个，listItemNum()为true
+				if(listItemNum()){
+					var numValue = document.getElementById('num').value;
+					var li = document.createElement('li');
+					if(reg.test(numValue)){
+						if(10 <= parseInt(numValue)&& parseInt(numValue)<=100){
+							li.style.height = numValue + 'px';
+							li.setAttribute("data-height", numValue);
+							console.log(li.getAttribute("data-height"));
+							li.onclick = function(){
+								this.parentNode.removeChild(this);
+							}
+							var item = list.getElementsByTagName('li')[0];
+							listItemNum();
+							list.insertBefore(li,item);							
+						}else{
+							alert('请输入范围为10-100的数字');
+						}
+					
+					}else{
+						alert('请输入数字');
+					}					
+				}else{
+					alert('队列元素数量最多限制为60个');
+				}
+			}
+			//右插入
+			function rightIn(){
+				if(listItemNum()){
+					var numValue = document.getElementById('num').value;
+					var li = document.createElement('li');
+					if(reg.test(numValue)){
+						li.style.height = numValue + 'px';
+						li.setAttribute("data-height", numValue);
+						li.onclick = function(){
+						this.parentNode.removeChild(this);
+					}					
+						listItemNum();
+						list.appendChild(li);
+					}else{
+						alert('请输入数字');
+					}						
+				}else{
+					alert('队列元素数量最多限制为60个');
+				}
+			}
+			//判断列表中有几个数字
+			function listItemNum(){
+				var listItem = list.getElementsByTagName('li');
+				if(listItem.length>59){
+					return false;
+				}else{
+					return true;
+				}
+			}
+			//排序
+			function sort(){
+				var listItem = list.getElementsByTagName('li');
+				var a = [];
+				for(var i=0,len=listItem.length;i<len;i++){
+					a[i] = parseInt(listItem[i].getAttribute("data-height"));
+				}
+				//使用冒泡排序法排序数组
+				for(var i=0;i<a.length;i++){
+					for(var j=1;j<a.length;j++){
+						if(a[j-1]>a[j]){
+							var temp = a[j-1];
+							a[j-1] = a[j];
+							a[j] = temp;
+						}
+					}
+				}
+				//把数据输出到sort-list中
+				for(var i=0;i<a.length;i++){
+					var li = document.createElement('li');
+					li.style.height = a[i]+'px';
+					sortList.appendChild(li);
+				}
+			}
+		</script>
+	</body>
+</html>
