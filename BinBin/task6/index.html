@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>数值的插入</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+
+	<body>
+		<div class="main">
+			<textarea id="word"></textarea>
+			<button id="search" type="button">查询</button>
+			<button id="left-out" onclick="leftOut()">左侧出</button>
+			<button id="right-out" onclick="rightOut()">右侧出</button>
+			<button id="left-in" onclick="leftIn()">左插入</button>
+			<button id="right-in" onclick="rightIn()">右插入</button>
+			<ul id="list" class="list">
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+			</ul>
+		</div>
+		<script>
+			var list = document.getElementById('list');
+			var listItem = list.getElementsByTagName('li');
+			//正则匹配
+			var reg=/[\n,，、,]/g;
+			//点击移除这个元素
+			for (var i = 0, len = listItem.length; i < len; i++) {
+				listItem[i].onclick = function() {
+					this.parentNode.removeChild(this);
+				}
+			}
+			//左侧出
+			function leftOut() {
+				list.getElementsByTagName('li')[0].remove();
+			}
+			//右侧出
+			function rightOut() {
+				var len = list.getElementsByTagName('li').length;
+				list.getElementsByTagName('li')[len - 1].remove();
+			}
+			//左插入
+			function leftIn() {
+				var wordValue = document.getElementById('word').value;
+				var li = document.createElement('li');
+				li.innerHTML = wordValue.replace(reg,' ');
+				li.onclick = function() {
+					this.parentNode.removeChild(this);
+				}
+				var item = list.getElementsByTagName('li')[0]
+				list.insertBefore(li, item);
+			}
+			//右插入
+			function rightIn() {
+				var wordValue = document.getElementById('word').value;
+				var li = document.createElement('li');
+				li.innerHTML = wordValue.replace(reg,' ');
+				li.onclick = function() {
+					this.parentNode.removeChild(this);
+				}
+				list.appendChild(li);
+			}
+			
+			document.getElementById('search').addEventListener('click',function(){
+				var searchWord = document.getElementById('word').value;
+				for(var i=0,len = listItem.length;i<len;i++){
+					var value = listItem[i].innerText;
+					console.log(searchWord);
+					console.log(value);
+					console.log(value.indexOf(searchWord))
+					if(value.indexOf(searchWord)>-1){
+						listItem[i].style.backgroundColor = '#ffaf00';
+					}else {
+						listItem[i].style.backgroundColor = 'red';
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

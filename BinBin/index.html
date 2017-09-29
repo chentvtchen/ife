@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.ok{
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="m">
+			<a class="aaa" href="#">你好</a>
+			<div class="ok">你好按时间的哈是开卷</div>
+		</div>
+		<div class="m">
+			<a class="aaa" href="#">ok</a>
+			<div class="ok">好的</div>
+		</div>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script>
+			$('.aaa').mouseover(function(){
+				var parent = this.parentNode;
+				var box = parent.getElementsByClassName('ok')[0];
+				console.log(box.className);
+				box.style.display = 'block';
+			})
+			$('.aaa').mouseout(function(){
+				var parent = this.parentNode;
+				var box = parent.getElementsByClassName('ok')[0];
+				box.style.display = 'none';
+			})
+		</script>
+	</body>
+</html>

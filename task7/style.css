@@ -1,0 +1,20 @@
+.box{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 45%;
+	height: 75%;
+	border: 3px solid #333;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+.outer-box.box{
+	width: 50%;
+	height: 150px;
+	margin-left: 25%;
+	margin-top: 120px;
+}
